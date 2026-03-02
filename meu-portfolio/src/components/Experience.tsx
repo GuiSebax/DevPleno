@@ -48,7 +48,7 @@ const experiences = [
       "Android Studio",
     ],
     description:
-      "Comecei como um desenvolvedor trainne lidando com pequenos problemas desenvolvidos em Android Studio, e outro projetos legados para conseguir entender as regras de negócio.",
+      "Comecei como desenvolvedor trainee lidando com pequenos problemas desenvolvidos em Android Studio e outros projetos legados para iniciar o entendimento das regras de negócio.",
   },
   {
     company: "Universidade Estadual de Maringá",
