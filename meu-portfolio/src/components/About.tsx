@@ -39,7 +39,7 @@ const About = () => {
             </p>
             <p className="pl-6">
               <span className="text-primary">nome</span>:{" "}
-              <span className="text-code-string">Guilherme Clemente</span>,
+              <span className="text-code-string">Guilherme F. Clemente</span>,
             </p>
             <p className="pl-6">
               <span className="text-primary">cargo</span>:{" "}
