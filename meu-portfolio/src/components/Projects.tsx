@@ -111,24 +111,26 @@ const projects: Project[] = [
   },
 
   {
-    title: "Hyper Fit Project",
+    title: "Padilha & Padilha Advogados — Landing Pages de Alta Conversão",
     description:
-      "Aplicação frontend desenvolvida em React para uma loja de roupas esportivas, com foco em produtos voltados para academia e conforto durante o treino.",
+      "Desenvolvimento de site profissional com duas landing pages independentes para escritório de advocacia, focadas em conversão de leads via tráfego pago.",
     longDescription:
-      "Hyper Fit Project é uma aplicação frontend desenvolvida em React para uma loja de roupas com foco em vestuário esportivo e itens voltados para academia, como camisas, shorts e tops. O projeto foi concebido para apresentar os produtos de forma clara e visualmente atrativa, priorizando a experiência do usuário, a navegação intuitiva e a responsividade. Durante o desenvolvimento, foram aplicados conceitos de componentização, reutilização de componentes e organização de layout, com foco em código limpo e estrutura escalável, permitindo que a aplicação possa evoluir futuramente para integrações com backend, carrinho de compras e outras funcionalidades comerciais.",
-    techs: ["React", "JavaScript", "HTML", "CSS"],
+      "O projeto nasceu da necessidade de um escritório de advocacia familiar de criar uma presença digital estratégica para suportar campanhas de Google Ads e Meta Ads. O escritório atua em duas frentes distintas — Direito do Agronegócio, conduzido pelo Dr. Gustavo Padilha, e Licitações & Contratos Administrativos, conduzido pela Dra. Francielle Padilha — o que exigiu a criação de duas landing pages completamente independentes, cada uma com seu público, tom de comunicação e proposta de valor específicos. Todo o projeto foi construído com foco em conversão: mínimo de cliques para o contato, CTA visível sem scroll, botão flutuante de WhatsApp e formulário simplificado. A identidade visual seguiu rigorasamente o branding do escritório, com paleta de cores, tipografia e assets gráficos fornecidos pelo cliente. O deploy foi realizado na Vercel com domínio customizado configurado via Registro.br, incluindo configuração completa de registros DNS e certificado SSL automático.",
+    techs: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel (deploy)"],
     github: "https://github.com/GuiSebax/HyperFit-Brasil-Project",
     live: null,
     features: [
-      "Catálogo de produtos esportivos",
-      "Interface responsiva",
-      "Componentização e reutilização de componentes",
-      "Layout focado em experiência do usuário",
-      "Estrutura preparada para futuras evoluções",
+      "Duas landing pages independentes com foco em conversão",
+      "Identidade visual fiel ao branding do cliente",
+      "Botão flutuante de WhatsApp",
+      "Formulário de contato simplificado",
+      "Design mobile-first",
+      "Domínio customizado com SSL",
+      "Integração contínua via GitHub + Vercel",
     ],
     role: "Frontend Developer",
     challenge:
-      "Criar uma interface organizada e responsiva para apresentação de produtos, mantendo uma estrutura de componentes reutilizáveis e preparada para a evolução do projeto.",
+      "O maior desafio foi o deploy. O projeto gerado estava em TanStack Start com SSR, arquitetura incompatível com a Vercel, o que causou erros de 404 em produção. Foi necessário entender a estrutura do projeto, configurar o vercel.json com rewrites e ajustar as configurações de build para que o roteamento funcionasse corretamente em produção. Toda a configuração de DNS no Registro.br também exigiu atenção para garantir que tanto o domínio raiz quanto o www apontassem corretamente.",
   },
 
   {
