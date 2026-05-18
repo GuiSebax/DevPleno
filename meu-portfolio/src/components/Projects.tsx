@@ -453,83 +453,87 @@ const Projects = () => {
           <div className="w-20 h-0.5 bg-primary mb-12" />
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              className="bg-card border border-border rounded-lg overflow-hidden card-hover group"
+              className="bg-card border border-border rounded-lg overflow-hidden card-hover group flex flex-col"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
-              <div className={`flex flex-col ${project.images.length > 0 ? "md:flex-row" : ""}`}>
-                {/* Content */}
-                <div className="flex-1 p-6 md:p-8 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div className="flex items-start justify-between mb-3 gap-4">
-                      <h3 className="font-mono text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
-                        {project.title}
-                      </h3>
-                      <div className="flex gap-3 text-muted-foreground shrink-0">
-                        {project.github && (
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:text-primary transition-colors"
-                            aria-label="GitHub"
-                          >
-                            <Github size={18} />
-                          </a>
-                        )}
-                        <button
-                          onClick={() => setSelectedProject(project)}
-                          className="hover:text-primary transition-colors"
-                          aria-label="Ver detalhes"
-                        >
-                          <ExternalLink size={18} />
-                        </button>
-                      </div>
+              {/* Terminal header */}
+              <div className="flex items-center gap-2 px-5 py-3 border-b border-border/50 font-mono text-xs text-muted-foreground shrink-0">
+                <span className="w-3 h-3 rounded-full bg-destructive/80 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-code-string/80 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-primary/80 inline-block" />
+                <span className="ml-2">
+                  {project.title.toLowerCase().replace(/\s+/g, "_")}.ts
+                </span>
+              </div>
+
+              {/* Image on top */}
+              {project.images.length > 0 && (
+                <div
+                  className="relative w-full aspect-video overflow-hidden cursor-pointer shrink-0"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <img
+                    src={project.images[0]}
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-card/50 to-transparent" />
+                  {project.images.length > 1 && (
+                    <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/75 backdrop-blur-sm text-xs font-mono px-2 py-1 rounded text-foreground/80">
+                      <Images size={12} />
+                      {project.images.length}
                     </div>
-                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techs.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded"
+                  )}
+                </div>
+              )}
+
+              {/* Content */}
+              <div className="p-6 flex flex-col gap-3 flex-1">
+                <div className="flex items-start justify-between gap-4">
+                  <h3 className="font-mono text-lg font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+                  <div className="flex gap-3 text-muted-foreground shrink-0">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors"
+                        aria-label="GitHub"
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        <Github size={18} />
+                      </a>
+                    )}
+                    <button
+                      onClick={() => setSelectedProject(project)}
+                      className="hover:text-primary transition-colors"
+                      aria-label="Ver detalhes"
+                    >
+                      <ExternalLink size={18} />
+                    </button>
                   </div>
                 </div>
-
-                {/* Image Preview */}
-                {project.images.length > 0 && (
-                  <div
-                    className="md:w-64 lg:w-80 shrink-0 cursor-pointer"
-                    onClick={() => setSelectedProject(project)}
-                  >
-                    <div className="relative w-full h-48 md:h-full min-h-48 overflow-hidden">
-                      <img
-                        src={project.images[0]}
-                        alt={`${project.title} preview`}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-background/40 md:via-transparent md:to-transparent" />
-                      {project.images.length > 1 && (
-                        <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/75 backdrop-blur-sm text-xs font-mono px-2 py-1 rounded text-foreground/80">
-                          <Images size={12} />
-                          {project.images.length}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+                <p className="text-muted-foreground leading-relaxed text-sm flex-1">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.techs.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}
