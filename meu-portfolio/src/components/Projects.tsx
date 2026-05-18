@@ -8,6 +8,9 @@ import {
   Target,
   Lightbulb,
   CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  Images,
 } from "lucide-react";
 
 interface Project {
@@ -15,11 +18,12 @@ interface Project {
   description: string;
   longDescription: string;
   techs: string[];
-  github: string;
-  live: string;
+  github: string | null;
+  live: string | null;
   features: string[];
   role: string;
   challenge: string;
+  images: string[];
 }
 
 const projects: Project[] = [
@@ -50,6 +54,7 @@ const projects: Project[] = [
     role: "Backend Developer",
     challenge:
       "Manter o mesmo domínio e regras de negócio em duas arquiteturas diferentes, garantindo consistência funcional enquanto se exploram abordagens distintas de organização, abstração e escalabilidade.",
+    images: [],
   },
 
   {
@@ -78,6 +83,7 @@ const projects: Project[] = [
     role: "Fullstack Developer",
     challenge:
       "Integrar e organizar o consumo da API Data Dragon através de um backend em Spring Boot, garantindo uma comunicação eficiente com o frontend em Next.js e mantendo uma estrutura de código limpa e escalável.",
+    images: ["/lol_photo1.png", "/lol_photo2.png"],
   },
 
   {
@@ -108,6 +114,11 @@ const projects: Project[] = [
     role: "Fullstack Developer",
     challenge:
       "Estruturar um monorepo consistente, garantindo reutilização de tipos entre frontend e backend, além de avaliar o uso de IA como apoio ao desenvolvimento sem comprometer decisões técnicas e qualidade do código.",
+    images: [
+      "/inicial_marketplace.png",
+      "/produtos_marketplace.png",
+      "/cadastro_marketplace.png",
+    ],
   },
 
   {
@@ -117,8 +128,8 @@ const projects: Project[] = [
     longDescription:
       "O projeto nasceu da necessidade de um escritório de advocacia familiar de criar uma presença digital estratégica para suportar campanhas de Google Ads e Meta Ads. O escritório atua em duas frentes distintas — Direito do Agronegócio, conduzido pelo Dr. Gustavo Padilha, e Licitações & Contratos Administrativos, conduzido pela Dra. Francielle Padilha — o que exigiu a criação de duas landing pages completamente independentes, cada uma com seu público, tom de comunicação e proposta de valor específicos. Todo o projeto foi construído com foco em conversão: mínimo de cliques para o contato, CTA visível sem scroll, botão flutuante de WhatsApp e formulário simplificado. A identidade visual seguiu rigorasamente o branding do escritório, com paleta de cores, tipografia e assets gráficos fornecidos pelo cliente. O deploy foi realizado na Vercel com domínio customizado configurado via Registro.br, incluindo configuração completa de registros DNS e certificado SSL automático.",
     techs: ["React", "TypeScript", "Vite", "Tailwind CSS", "Vercel (deploy)"],
-    github: "https://github.com/GuiSebax/HyperFit-Brasil-Project",
-    live: null,
+    github: null,
+    live: "https://www.padilhaepadilha.com.br/",
     features: [
       "Duas landing pages independentes com foco em conversão",
       "Identidade visual fiel ao branding do cliente",
@@ -131,62 +142,131 @@ const projects: Project[] = [
     role: "Frontend Developer",
     challenge:
       "O maior desafio foi o deploy. O projeto gerado estava em TanStack Start com SSR, arquitetura incompatível com a Vercel, o que causou erros de 404 em produção. Foi necessário entender a estrutura do projeto, configurar o vercel.json com rewrites e ajustar as configurações de build para que o roteamento funcionasse corretamente em produção. Toda a configuração de DNS no Registro.br também exigiu atenção para garantir que tanto o domínio raiz quanto o www apontassem corretamente.",
+    images: [
+      "/advocacia_photo1.png",
+      "/advocacia_photo2.png",
+      "/advocacia_photo3.png",
+      "/advocacia_photo4.png",
+    ],
   },
 
   {
-    title: "Finance Me — Gerenciador de Finanças Pessoais",
+    title: "Personal Task Manager - Gerenciador de Tarefas Pessoais",
     description:
-      "Aplicação fullstack para gerenciamento de finanças pessoais, permitindo controle de transações, acompanhamento de metas financeiras e visualização de dados por meio de um dashboard interativo.",
+      "Aplicação fullstack para gerenciamento de tarefas pessoais, permitindo controle de tarefas e visualização de progresso por meio de um dashboard interativo.",
     longDescription:
-      "Finance Me é uma aplicação fullstack desenvolvida para auxiliar usuários no controle de suas finanças pessoais, oferecendo funcionalidades como cadastro e autenticação segura, gerenciamento completo de transações e acompanhamento de metas financeiras. O sistema conta com um backend em Node.js utilizando Express e TypeScript, responsável pela lógica de negócio, autenticação via JWT e persistência de dados em SQLite. No frontend, a aplicação foi construída em React com Tailwind CSS, focando em uma interface responsiva e intuitiva, com dashboard interativo que apresenta resumo financeiro, gráficos de saldo, histórico de transações e progresso de metas. O projeto prioriza organização de código, separação de responsabilidades e boas práticas de desenvolvimento fullstack.",
+      "Personal Task Manager é uma aplicação fullstack desenvolvida para auxiliar usuários no controle de suas tarefas pessoais, oferecendo funcionalidades como cadastro e autenticação segura, gerenciamento completo de tarefas e visualização de progresso. O sistema conta com um backend em Node.js utilizando Express e TypeScript, responsável pela lógica de negócio, autenticação via JWT e persistência de dados em SQLite. No frontend, a aplicação foi construída em React com Tailwind CSS, focando em uma interface responsiva e intuitiva, com dashboard interativo que apresenta resumo de tarefas, gráficos de progresso e histórico de tarefas. O projeto prioriza organização de código, separação de responsabilidades e boas práticas de desenvolvimento fullstack.",
     techs: [
       "Node.js",
       "Express.js",
       "TypeScript",
-      "SQLite",
-      "JWT",
+      "Supabase",
+      "Clerk",
       "Bcrypt",
-      "React",
+      "Next.js",
       "Tailwind CSS",
       "Axios",
     ],
-    github: "https://github.com/GuiSebax/Personal-Finance-Manager",
+    github: "https://github.com/GuiSebax/task-manager",
     live: null,
     features: [
-      "Autenticação de usuários com JWT",
+      "Autenticação de usuários com Clerk",
       "Cadastro e login com senhas criptografadas",
-      "CRUD completo de transações financeiras",
-      "Gerenciamento de metas financeiras com acompanhamento de progresso",
-      "Dashboard financeiro com resumo de receitas, despesas e saldo",
+      "CRUD completo de tarefas",
+      "Dashboard interativo com resumo de tarefas e progresso atual",
       "Interface responsiva com Tailwind CSS",
     ],
     role: "Fullstack Developer",
     challenge:
-      "Estruturar uma aplicação fullstack completa com autenticação segura, integração entre frontend e backend e visualização clara de dados financeiros, mantendo uma arquitetura organizada e código de fácil manutenção.",
-  },
-
-  {
-    title: "Landing Page — Controle da Ansiedade",
-    description:
-      "Landing page desenvolvida em React com Tailwind CSS, focada em fornecer dicas, recursos e informações para auxiliar no controle da ansiedade.",
-    longDescription:
-      "Landing page desenvolvida em React com Tailwind CSS, com o objetivo de oferecer informações, dicas práticas e recursos voltados ao controle da ansiedade. A aplicação apresenta uma interface moderna, responsiva e de fácil navegação, priorizando clareza no conteúdo e uma experiência agradável ao usuário. Foram utilizadas animações suaves com Framer Motion para tornar a interação mais fluida, além de uma estrutura organizada que permite acesso rápido a seções como dicas, recursos úteis, depoimentos e chamada para ação por meio de um formulário de inscrição.",
-    techs: ["React", "JavaScript", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/GuiSebax/Landing-Page",
-    live: null,
-    features: [
-      "Seção com dicas e técnicas para controle da ansiedade",
-      "Listagem de recursos e ferramentas informativas",
-      "Área para depoimentos e relatos",
-      "Formulário de inscrição para recebimento de conteúdos",
-      "Layout responsivo para diferentes tamanhos de tela",
-      "Animações suaves com Framer Motion",
+      "Estruturar uma aplicação fullstack completa com autenticação segura, integração entre frontend e backend e visualização clara de tarefas, mantendo uma arquitetura organizada e código de fácil manutenção.",
+    images: [
+      "/taskmanager_photo1.png",
+      "/taskmanager_photo2.png",
+      "/taskmanager_photo3.png",
+      "/taskmanager_photo4.png",
     ],
-    role: "Frontend Developer",
-    challenge:
-      "Criar uma landing page informativa e acessível, equilibrando design, animações e clareza de conteúdo, garantindo boa experiência do usuário e responsividade.",
   },
 ];
+
+const ImageGallery = ({ images }: { images: string[] }) => {
+  const [current, setCurrent] = useState(0);
+
+  if (images.length === 0) return null;
+
+  const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
+  const next = () => setCurrent((c) => (c + 1) % images.length);
+
+  return (
+    <div className="space-y-2">
+      <div className="relative w-full aspect-video rounded-md overflow-hidden bg-secondary/30 group">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={current}
+            src={images[current]}
+            alt={`Screenshot ${current + 1}`}
+            className="w-full h-full object-cover"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+          />
+        </AnimatePresence>
+
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={prev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-background/75 hover:bg-background/95 text-foreground rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+            >
+              <ChevronLeft size={16} />
+            </button>
+            <button
+              onClick={next}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-background/75 hover:bg-background/95 text-foreground rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+            >
+              <ChevronRight size={16} />
+            </button>
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "bg-primary w-4"
+                      : "bg-foreground/40 hover:bg-foreground/60 w-1.5"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {images.length > 1 && (
+        <div className="flex gap-2">
+          {images.map((img, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              className={`relative flex-1 aspect-video rounded overflow-hidden border-2 transition-all ${
+                i === current
+                  ? "border-primary"
+                  : "border-border/50 hover:border-border opacity-60 hover:opacity-80"
+              }`}
+            >
+              <img
+                src={img}
+                alt={`Thumbnail ${i + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ProjectModal = ({
   project,
@@ -208,14 +288,14 @@ const ProjectModal = ({
         onClick={onClose}
       />
       <motion.div
-        className="relative bg-card border border-border rounded-lg w-full max-w-2xl max-h-[85vh] overflow-y-auto"
+        className="relative bg-card border border-border rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto"
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 30, scale: 0.95 }}
         transition={{ duration: 0.3 }}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-card/95 backdrop-blur-sm border-b border-border p-6 flex items-center justify-between">
+        <div className="sticky top-0 bg-card/95 backdrop-blur-sm border-b border-border p-6 flex items-center justify-between z-10">
           <div className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
             <span className="w-3 h-3 rounded-full bg-destructive/80 inline-block" />
             <span className="w-3 h-3 rounded-full bg-code-string/80 inline-block" />
@@ -233,6 +313,22 @@ const ProjectModal = ({
         </div>
 
         <div className="p-6 space-y-6">
+          {/* Image Gallery */}
+          {project.images.length > 0 && (
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Images size={16} className="text-primary" />
+                <span className="font-mono text-sm text-foreground font-semibold">
+                  screenshots
+                </span>
+                <span className="font-mono text-xs text-muted-foreground">
+                  ({project.images.length})
+                </span>
+              </div>
+              <ImageGallery images={project.images} />
+            </div>
+          )}
+
           {/* Title */}
           <div>
             <h3 className="font-mono text-2xl font-bold text-foreground mb-2">
@@ -307,16 +403,18 @@ const ProjectModal = ({
 
           {/* Links */}
           <div className="flex gap-3 pt-2">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-muted-foreground hover:text-primary hover:border-primary/40 transition-all font-mono text-sm"
-            >
-              <Github size={16} />
-              código
-            </a>
-            {project.live !== null && (
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-4 py-2 border border-border rounded-md text-muted-foreground hover:text-primary hover:border-primary/40 transition-all font-mono text-sm"
+              >
+                <Github size={16} />
+                código
+              </a>
+            )}
+            {project.live && (
               <a
                 href={project.live}
                 target="_blank"
@@ -359,45 +457,79 @@ const Projects = () => {
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              className="bg-card border border-border rounded-lg p-6 md:p-8 card-hover group"
+              className="bg-card border border-border rounded-lg overflow-hidden card-hover group"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="font-mono text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                  {project.title}
-                </h3>
-                <div className="flex gap-3 text-muted-foreground">
-                  <a
-                    href={project.github}
-                    className="hover:text-primary transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <Github size={18} />
-                  </a>
-                  <button
-                    onClick={() => setSelectedProject(project)}
-                    className="hover:text-primary transition-colors"
-                    aria-label="Ver detalhes"
-                  >
-                    <ExternalLink size={18} />
-                  </button>
+              <div className={`flex flex-col ${project.images.length > 0 ? "md:flex-row" : ""}`}>
+                {/* Content */}
+                <div className="flex-1 p-6 md:p-8 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div className="flex items-start justify-between mb-3 gap-4">
+                      <h3 className="font-mono text-xl font-bold text-foreground group-hover:text-primary transition-colors leading-tight">
+                        {project.title}
+                      </h3>
+                      <div className="flex gap-3 text-muted-foreground shrink-0">
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-primary transition-colors"
+                            aria-label="GitHub"
+                          >
+                            <Github size={18} />
+                          </a>
+                        )}
+                        <button
+                          onClick={() => setSelectedProject(project)}
+                          className="hover:text-primary transition-colors"
+                          aria-label="Ver detalhes"
+                        >
+                          <ExternalLink size={18} />
+                        </button>
+                      </div>
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.techs.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <p className="text-muted-foreground mb-4 leading-relaxed">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.techs.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs font-mono text-primary/80 bg-primary/10 px-2 py-1 rounded"
+
+                {/* Image Preview */}
+                {project.images.length > 0 && (
+                  <div
+                    className="md:w-64 lg:w-80 shrink-0 cursor-pointer"
+                    onClick={() => setSelectedProject(project)}
                   >
-                    {tech}
-                  </span>
-                ))}
+                    <div className="relative w-full h-48 md:h-full min-h-48 overflow-hidden">
+                      <img
+                        src={project.images[0]}
+                        alt={`${project.title} preview`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent md:bg-gradient-to-r md:from-background/40 md:via-transparent md:to-transparent" />
+                      {project.images.length > 1 && (
+                        <div className="absolute bottom-2 right-2 flex items-center gap-1 bg-background/75 backdrop-blur-sm text-xs font-mono px-2 py-1 rounded text-foreground/80">
+                          <Images size={12} />
+                          {project.images.length}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
