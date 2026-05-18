@@ -3,20 +3,30 @@ import { motion } from "framer-motion";
 const techStack = [
   {
     category: "Frontend",
+    icon: "◈",
     techs: ["React", "Next.js", "React Native", "TypeScript", "Tailwind CSS"],
   },
   {
     category: "Backend",
+    icon: "◉",
     techs: ["Node.js", "NestJS", "Spring Boot", "REST APIs", "GraphQL"],
   },
-  { category: "Database", techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma"] },
-  { category: "DevOps", techs: ["Docker", "CI/CD", "Git", "Linux", "AWS"] },
+  {
+    category: "Database",
+    icon: "◎",
+    techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "SQLite"],
+  },
+  {
+    category: "DevOps",
+    icon: "⬡",
+    techs: ["Docker", "CI/CD", "Git", "Linux", "AWS"],
+  },
 ];
 
 const Skills = () => {
   return (
     <section id="skills" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,40 +34,36 @@ const Skills = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2">
-            <span className="text-primary font-mono text-lg block mb-2">
-              02.
-            </span>
+            <span className="text-primary font-mono text-lg block mb-2">02.</span>
             tech_stack
           </h2>
-          <div className="w-20 h-0.5 bg-primary mb-12" />
+          <div className="section-line" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {techStack.map((group, i) => (
             <motion.div
               key={group.category}
-              className="bg-card border border-border rounded-lg p-6 card-hover"
+              className="bg-card border border-border rounded-xl p-6 card-hover"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-primary font-mono text-sm">{">"}</span>
-                <h3 className="font-mono text-foreground font-semibold">
+              <div className="flex items-center gap-2.5 mb-5">
+                <span className="text-primary text-lg leading-none">{group.icon}</span>
+                <h3 className="font-mono text-sm font-semibold text-foreground">
                   {group.category}
                 </h3>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <ul className="space-y-2.5">
                 {group.techs.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1.5 bg-secondary text-secondary-foreground text-sm font-mono rounded border border-border hover:border-primary/40 transition-colors cursor-default"
-                  >
-                    {tech}
-                  </span>
+                  <li key={tech} className="flex items-center gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary/50 shrink-0" />
+                    <span className="text-sm text-muted-foreground font-mono">{tech}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
           ))}
         </div>
