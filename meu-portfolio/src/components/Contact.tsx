@@ -47,14 +47,16 @@ const Contact = () => {
         </motion.p>
 
         <motion.a
-          href="mailto:guiclemente2003@gmail.com"
+          href="https://wa.me/554497090593"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-mono text-sm rounded-xl hover:opacity-90 hover:shadow-xl hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-200"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <Mail size={18} />
+          <WhatsAppIcon size={18} />
           diga_olá()
           <ArrowRight size={16} className="ml-1" />
         </motion.a>
