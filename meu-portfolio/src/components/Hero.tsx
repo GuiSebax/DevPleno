@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Download } from "lucide-react";
 
 const WhatsAppIcon = ({ size = 22 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -88,6 +88,14 @@ const Hero = () => {
             className="px-6 py-3 border border-primary/60 text-primary font-mono text-sm rounded-md hover:bg-primary/10 hover:border-primary transition-all"
           >
             contato()
+          </a>
+          <a
+            href="/curriculo.pdf"
+            download
+            className="inline-flex items-center gap-2 px-6 py-3 border border-border text-muted-foreground font-mono text-sm rounded-md hover:text-primary hover:border-primary/60 transition-all"
+          >
+            <Download size={15} />
+            curriculo.pdf
           </a>
         </motion.div>
 

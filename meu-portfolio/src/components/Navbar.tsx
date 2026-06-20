@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 
 const navItems = [
   { label: "sobre", href: "#about" },
@@ -46,6 +46,14 @@ const Navbar = () => {
               {item.label}
             </a>
           ))}
+          <a
+            href="/curriculo.pdf"
+            download
+            className="inline-flex items-center gap-1.5 font-mono text-sm text-muted-foreground hover:text-primary transition-colors border border-border/60 hover:border-primary/50 px-3 py-1.5 rounded-md"
+          >
+            <Download size={13} />
+            cv
+          </a>
         </div>
 
         <button
@@ -76,6 +84,14 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
+            <a
+              href="/curriculo.pdf"
+              download
+              className="inline-flex items-center gap-2 font-mono text-sm text-muted-foreground hover:text-primary transition-colors py-3"
+            >
+              <Download size={14} />
+              curriculo.pdf
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
