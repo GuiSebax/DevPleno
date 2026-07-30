@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
@@ -11,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Images,
+  Maximize2,
 } from "lucide-react";
 
 interface Project {
@@ -217,6 +219,7 @@ const projects: Project[] = [
 
 const ImageGallery = ({ images }: { images: string[] }) => {
   const [current, setCurrent] = useState(0);
+  const [zoomed, setZoomed] = useState(false);
 
   if (images.length === 0) return null;
 
@@ -225,19 +228,28 @@ const ImageGallery = ({ images }: { images: string[] }) => {
 
   return (
     <div className="space-y-2">
-      <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-secondary/30 group">
+      <div className="relative w-full h-[260px] sm:h-[360px] md:h-[440px] rounded-lg overflow-hidden bg-black/40 group flex items-center justify-center">
         <AnimatePresence mode="wait">
           <motion.img
             key={current}
             src={images[current]}
             alt={`Screenshot ${current + 1}`}
-            className="w-full h-full object-cover"
+            className="max-w-full max-h-full object-contain cursor-zoom-in"
+            onClick={() => setZoomed(true)}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.2 }}
           />
         </AnimatePresence>
+
+        <button
+          onClick={() => setZoomed(true)}
+          className="absolute top-2 right-2 bg-background/75 hover:bg-background/95 text-foreground rounded-md p-1.5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+          aria-label="Ampliar imagem"
+        >
+          <Maximize2 size={14} />
+        </button>
 
         {images.length > 1 && (
           <>
@@ -285,6 +297,70 @@ const ImageGallery = ({ images }: { images: string[] }) => {
           ))}
         </div>
       )}
+
+      {createPortal(
+        <AnimatePresence>
+          {zoomed && (
+            <motion.div
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-md p-4 sm:p-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setZoomed(false)}
+            >
+              <button
+                onClick={() => setZoomed(false)}
+                className="absolute top-4 right-4 sm:top-6 sm:right-6 text-foreground/80 hover:text-primary bg-background/60 hover:bg-background/90 rounded-full p-2 transition-colors"
+                aria-label="Fechar"
+              >
+                <X size={20} />
+              </button>
+
+              <motion.img
+                key={current}
+                src={images[current]}
+                alt={`Screenshot ${current + 1} ampliado`}
+                className="max-w-full max-h-full object-contain rounded-lg"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+              />
+
+              {images.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prev();
+                    }}
+                    className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 bg-background/60 hover:bg-background/90 text-foreground rounded-full p-2 transition-colors"
+                    aria-label="Imagem anterior"
+                  >
+                    <ChevronLeft size={22} />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      next();
+                    }}
+                    className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 bg-background/60 hover:bg-background/90 text-foreground rounded-full p-2 transition-colors"
+                    aria-label="Próxima imagem"
+                  >
+                    <ChevronRight size={22} />
+                  </button>
+                  <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-foreground/70 bg-background/60 px-2.5 py-1 rounded-md">
+                    {current + 1} / {images.length}
+                  </div>
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 };
@@ -306,7 +382,7 @@ const ProjectModal = ({
     >
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={onClose} />
       <motion.div
-        className="relative bg-card border border-border rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        className="relative bg-card border border-border rounded-xl w-full max-w-3xl max-h-[90vh] overflow-y-auto"
         initial={{ opacity: 0, y: 30, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 30, scale: 0.95 }}
