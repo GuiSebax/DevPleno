@@ -7,6 +7,7 @@ const navItems = [
   { label: "skills", href: "#skills" },
   { label: "projetos", href: "#projetos" },
   { label: "experiência", href: "#experience" },
+  { label: "certificações", href: "#certificacoes" },
   { label: "contato", href: "#contato" },
 ];
 
@@ -36,7 +37,7 @@ const Navbar = () => {
           {"<gc />"}
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navItems.map((item) => (
             <a
               key={item.href}
@@ -57,7 +58,7 @@ const Navbar = () => {
         </div>
 
         <button
-          className="md:hidden text-muted-foreground hover:text-primary transition-colors p-1"
+          className="lg:hidden text-muted-foreground hover:text-primary transition-colors p-1"
           onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
@@ -68,7 +69,7 @@ const Navbar = () => {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="md:hidden bg-background/95 backdrop-blur-md border-b border-border px-6 pb-6"
+            className="lg:hidden bg-background/95 backdrop-blur-md border-b border-border px-6 pb-6"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

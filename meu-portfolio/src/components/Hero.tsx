@@ -64,7 +64,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
         >
-          Desenvolvedor pleno apaixonado por criar soluções robustas e
+          Desenvolvedor Fullstack apaixonado por criar soluções robustas e
           escaláveis. Experiência com{" "}
           <span className="text-primary">React</span>,{" "}
           <span className="text-primary">Next.js</span>,{" "}

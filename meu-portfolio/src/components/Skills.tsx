@@ -17,9 +17,14 @@ const techStack = [
     techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "SQLite"],
   },
   {
-    category: "DevOps",
+    category: "DevOps & Cloud",
     icon: "⬡",
-    techs: ["Docker", "CI/CD", "Git", "Linux", "AWS"],
+    techs: ["Docker", "Docker Compose", "AWS (EC2, S3, RDS)", "CI/CD (GitHub Actions)", "Git", "Linux"],
+  },
+  {
+    category: "Arquitetura & Segurança",
+    icon: "◇",
+    techs: ["Multi-tenant / RLS", "JWT & OAuth2", "Stripe / Billing", "Testes automatizados", "LGPD & OWASP"],
   },
 ];
 
@@ -40,7 +45,7 @@ const Skills = () => {
           <div className="section-line" />
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {techStack.map((group, i) => (
             <motion.div
               key={group.category}

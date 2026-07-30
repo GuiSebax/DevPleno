@@ -28,6 +28,94 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "SaaS Multi-Tenant Billing Platform",
+    description:
+      "Plataforma B2B de gestão de projetos multiempresa (multi-tenant) com isolamento de dados via Row Level Security no PostgreSQL, billing recorrente via Stripe e deploy completo em containers na AWS.",
+    longDescription:
+      "Plataforma B2B inspirada em Notion/Linear onde cada tenant é uma organização com membros, projetos e tarefas. O grande foco do projeto foi resolver multi-tenancy de verdade: isolamento de dados garantido no nível do banco via PostgreSQL Row Level Security (RLS) com FORCE ROW SECURITY, contexto de tenant propagado com SET LOCAL dentro de transações (nunca SET SESSION, que vazaria entre requisições em um connection pool) e organization_id gravado por trigger no banco — a aplicação nunca envia esse campo. O backend é uma API modular em NestJS com autenticação JWT (access token de 15min + refresh token rotation de 7 dias, com detecção de reuso de token comprometido), e o billing é feito via Stripe (Checkout, Webhooks e Customer Portal), com processamento assíncrono dos webhooks em fila (BullMQ + Redis) para responder à Stripe em menos de 5 segundos e garantir idempotência. O projeto inteiro foi versionado no Git desde o primeiro commit, com ambiente reproduzível via Docker e Docker Compose (Postgres + Redis) tanto em desenvolvimento quanto em produção, e publicado na AWS (ECS Fargate para API e worker, RDS PostgreSQL gerenciado e S3 para armazenamento de arquivos), com segredos geridos via variáveis de ambiente/Secrets Manager e pipeline de CI/CD no GitHub Actions rodando lint, testes unitários e testes de integração contra um banco real antes de cada deploy.",
+    techs: [
+      "Next.js",
+      "NestJS",
+      "TypeScript",
+      "PostgreSQL",
+      "Row Level Security",
+      "Drizzle ORM",
+      "Redis",
+      "BullMQ",
+      "Stripe",
+      "Docker",
+      "AWS (ECS, RDS, S3)",
+      "GitHub Actions (CI/CD)",
+    ],
+    github: "https://github.com/GuiSebax/SaaS-Multi-Tenant-Billing",
+    live: null,
+    features: [
+      "Isolamento multi-tenant real via PostgreSQL RLS (não apenas WHERE organization_id = ?)",
+      "Billing recorrente completo com Stripe (Checkout, Webhooks e Customer Portal)",
+      "Autenticação JWT com refresh token rotation e detecção de token comprometido",
+      "Processamento assíncrono e idempotente de webhooks com BullMQ + Redis",
+      "Observabilidade: logs estruturados, métricas Prometheus e health checks",
+      "Ambiente 100% dockerizado (dev e produção) com deploy na AWS (ECS + RDS + S3)",
+      "Testes unitários e de integração + pipeline de CI/CD no GitHub Actions",
+      "Versionamento completo no Git com documentação de arquitetura e ADRs",
+    ],
+    role: "Fullstack Developer",
+    challenge:
+      "Garantir isolamento de dados entre organizações mesmo diante de bugs na aplicação — resolvido colocando a regra no banco (RLS + FORCE ROW SECURITY) em vez de confiar apenas em filtros no código, além de estruturar o pipeline de deploy (Docker → AWS) e o processamento assíncrono de webhooks do Stripe de forma confiável e auditável.",
+    images: [
+      "/billing1.png",
+      "/billing2.png",
+      "/billing3.png",
+      "/billing4.png",
+      "/billing5.png",
+      "/billing6.png",
+      "/billing7.png",
+    ],
+  },
+  {
+    title: "Finance Control — Controle de Gastos Pessoais",
+    description:
+      "Aplicação web para controle de entradas, saídas e saldo por conta, com dashboards e gráficos de gastos, autenticação segura e deploy full-Docker com backups automáticos.",
+    longDescription:
+      "Finance Control é uma plataforma pessoal de controle financeiro construída em Next.js (App Router) com Prisma e PostgreSQL, permitindo cadastrar contas, categorizar entradas e saídas e acompanhar o saldo em tempo real por conta e no total. O dashboard traz gráficos de gastos por categoria e evolução mensal (Recharts), com filtros por período. A autenticação é feita com Auth.js (NextAuth) e senhas com hash forte, e todas as validações de entrada rodam no servidor com Zod. A aplicação é PWA — instalável na tela inicial do celular — para acesso tanto do computador quanto do smartphone. Toda a infraestrutura roda em Docker Compose com quatro serviços: banco PostgreSQL, aplicação Next.js, proxy reverso Caddy (HTTPS automático via Let's Encrypt) e um serviço de backup que roda pg_dump a cada 24h, compacta o dump e mantém retenção configurável (14 dias por padrão), com os backups replicados para um bucket S3 na AWS. Todo o histórico de desenvolvimento foi versionado no Git, evoluindo em fases documentadas (MVP → análise → controle avançado → polimento), com deploy final em uma instância AWS EC2.",
+    techs: [
+      "Next.js",
+      "TypeScript",
+      "Prisma ORM",
+      "PostgreSQL",
+      "Auth.js (NextAuth)",
+      "Tailwind CSS",
+      "Recharts",
+      "Docker",
+      "Docker Compose",
+      "Caddy (HTTPS automático)",
+      "AWS (EC2 + S3)",
+      "Zod",
+    ],
+    github: "https://github.com/GuiSebax/FinanceControl",
+    live: null,
+    features: [
+      "Registro rápido de entradas e saídas com categorização (com subcategorias)",
+      "Saldo em tempo real, total e por conta",
+      "Dashboard com gráficos de gastos por categoria e evolução mensal (Recharts)",
+      "PWA — instalável no celular, uso responsivo em qualquer dispositivo",
+      "Autenticação segura com Auth.js e validação de dados com Zod",
+      "Infraestrutura 100% Docker Compose (app + banco + proxy + backup)",
+      "HTTPS automático via Caddy e backups diários automáticos do PostgreSQL replicados para S3",
+      "Deploy em produção na AWS (EC2) com versionamento completo no Git",
+    ],
+    role: "Fullstack Developer",
+    challenge:
+      "Orquestrar uma infraestrutura completa e resiliente em um único docker-compose (app, banco, proxy com HTTPS automático e backup agendado), garantindo que os dados de cada usuário fiquem isolados e que um backup diário e restaurável do banco exista sempre, sem depender de intervenção manual.",
+    images: [
+      "/finance1.png",
+      "/finance2.png",
+      "/finance3.png",
+      "/finance4.png",
+      "/finance5.png",
+    ],
+  },
+  {
     title: "Nest & Express API",
     description:
       "Um projeto backend que reúne duas implementações de API utilizando Express.js e Nest.js, com o objetivo de comparar arquiteturas, padrões e a experiência de desenvolvimento entre os dois frameworks dentro do ecossistema Node.js.",
@@ -48,27 +136,6 @@ const projects: Project[] = [
     challenge:
       "Manter o mesmo domínio e regras de negócio em duas arquiteturas diferentes, garantindo consistência funcional enquanto se exploram abordagens distintas de organização, abstração e escalabilidade.",
     images: [],
-  },
-  {
-    title: "League of Legends Application",
-    description:
-      "Aplicação web desenvolvida com Next.js e Spring Boot que consome a API Data Dragon para exibir informações dos campeões do League of Legends.",
-    longDescription:
-      "Aplicação fullstack desenvolvida com Next.js no frontend e Spring Boot no backend, responsável por consumir a API oficial Data Dragon da Riot Games para obtenção dos dados dos campeões do League of Legends. A aplicação exibe informações como nome, imagem e lore (blurb) de cada campeão, com foco em organização de código, separação de responsabilidades e boas práticas de consumo de APIs externas.",
-    techs: ["Next.js", "React", "TypeScript", "Spring Boot", "Java", "REST API"],
-    github: "https://github.com/GuiSebax/League-Of-Legends-Application",
-    live: null,
-    features: [
-      "Listagem de campeões do League of Legends",
-      "Consumo da API Data Dragon",
-      "Exibição de nome, imagem e lore dos campeões",
-      "Backend intermediando e organizando o consumo da API externa",
-      "Arquitetura separada entre frontend e backend",
-    ],
-    role: "Fullstack Developer",
-    challenge:
-      "Integrar e organizar o consumo da API Data Dragon através de um backend em Spring Boot, garantindo uma comunicação eficiente com o frontend em Next.js e mantendo uma estrutura de código limpa e escalável.",
-    images: ["/lol_photo1.png", "/lol_photo2.png"],
   },
   {
     title: "Marketplace — Fullstack Application",
@@ -202,12 +269,12 @@ const ImageGallery = ({ images }: { images: string[] }) => {
       </div>
 
       {images.length > 1 && (
-        <div className="flex gap-2">
+        <div className="flex gap-2 overflow-x-auto pb-1">
           {images.map((img, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`relative flex-1 aspect-video rounded overflow-hidden border-2 transition-all ${
+              className={`relative w-16 sm:w-20 shrink-0 aspect-video rounded overflow-hidden border-2 transition-all ${
                 i === current
                   ? "border-primary"
                   : "border-border/50 hover:border-border opacity-60 hover:opacity-80"

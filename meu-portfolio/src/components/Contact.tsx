@@ -21,7 +21,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          05. o que vem por aí?
+          06. o que vem por aí?
         </motion.span>
 
         <motion.h2

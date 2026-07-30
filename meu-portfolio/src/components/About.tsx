@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 const highlights = [
   "React, Next.js & TypeScript no frontend",
   "Spring Boot & NestJS no backend",
-  "PostgreSQL, Docker e Cloud na infra",
+  "PostgreSQL, Docker e AWS na infraestrutura",
+  "Integrações via API REST, multi-tenant e segurança de dados",
   "Ciclo Scrum completo com foco em escala",
 ];
 
@@ -34,7 +35,11 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             <p className="text-muted-foreground leading-relaxed">
-              Desenvolvedor Fullstack Pleno com mais de{" "}
+              Desenvolvedor Fullstack Pleno, formado em{" "}
+              <span className="text-foreground font-medium">
+                Ciência da Computação pela Universidade Estadual de Maringá
+              </span>{" "}
+              (2021–2025), com mais de{" "}
               <span className="text-foreground font-medium">2 anos de experiência</span>{" "}
               construindo aplicações web e mobile robustas. Atualmente na{" "}
               <span className="text-foreground font-medium">Accion Sistemas</span>, onde
@@ -92,6 +97,10 @@ const About = () => {
               <p className="pl-5">
                 <span className="text-primary">localização</span>:{" "}
                 <span className="text-code-string">"Maringá, PR"</span>,
+              </p>
+              <p className="pl-5">
+                <span className="text-primary">formação</span>:{" "}
+                <span className="text-code-string">"Ciência da Computação — UEM (2021–2025)"</span>,
               </p>
               <p className="pl-5">
                 <span className="text-primary">foco</span>: [
