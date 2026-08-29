@@ -1,34 +1,78 @@
 import { motion } from "framer-motion";
+import { useLanguage, Lang } from "@/hooks/use-language";
 
-const techStack = [
-  {
-    category: "Frontend",
-    icon: "◈",
-    techs: ["React", "Next.js", "React Native", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    category: "Backend",
-    icon: "◉",
-    techs: ["Node.js", "NestJS", "Spring Boot", "REST APIs", "GraphQL"],
-  },
-  {
-    category: "Database",
-    icon: "◎",
-    techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "SQLite"],
-  },
-  {
-    category: "DevOps & Cloud",
-    icon: "⬡",
-    techs: ["Docker", "Docker Compose", "AWS (EC2, S3, RDS)", "CI/CD (GitHub Actions)", "Git", "Linux"],
-  },
-  {
-    category: "Arquitetura & Segurança",
-    icon: "◇",
-    techs: ["Multi-tenant / RLS", "JWT & OAuth2", "Stripe / Billing", "Testes automatizados", "LGPD & OWASP"],
-  },
-];
+interface SkillGroup {
+  category: string;
+  icon: string;
+  techs: string[];
+}
+
+const techStackByLang: Record<Lang, SkillGroup[]> = {
+  pt: [
+    {
+      category: "Frontend",
+      icon: "◈",
+      techs: ["React", "Next.js", "React Native", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      category: "Backend",
+      icon: "◉",
+      techs: ["Node.js", "NestJS", "Spring Boot", "REST APIs", "GraphQL"],
+    },
+    {
+      category: "Banco de Dados",
+      icon: "◎",
+      techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "SQLite"],
+    },
+    {
+      category: "DevOps & Cloud",
+      icon: "⬡",
+      techs: ["Docker", "Docker Compose", "AWS (EC2, S3, RDS)", "CI/CD (GitHub Actions)", "Git", "Linux"],
+    },
+    {
+      category: "Arquitetura & Segurança",
+      icon: "◇",
+      techs: ["Multi-tenant / RLS", "JWT & OAuth2", "Stripe / Billing", "Testes automatizados", "LGPD & OWASP"],
+    },
+  ],
+  en: [
+    {
+      category: "Frontend",
+      icon: "◈",
+      techs: ["React", "Next.js", "React Native", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      category: "Backend",
+      icon: "◉",
+      techs: ["Node.js", "NestJS", "Spring Boot", "REST APIs", "GraphQL"],
+    },
+    {
+      category: "Database",
+      icon: "◎",
+      techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "SQLite"],
+    },
+    {
+      category: "DevOps & Cloud",
+      icon: "⬡",
+      techs: ["Docker", "Docker Compose", "AWS (EC2, S3, RDS)", "CI/CD (GitHub Actions)", "Git", "Linux"],
+    },
+    {
+      category: "Architecture & Security",
+      icon: "◇",
+      techs: ["Multi-tenancy / RLS", "JWT & OAuth2", "Stripe / Billing", "Automated testing", "LGPD & OWASP"],
+    },
+  ],
+};
+
+const heading: Record<Lang, string> = {
+  pt: "tech_stack",
+  en: "tech_stack",
+};
 
 const Skills = () => {
+  const { lang } = useLanguage();
+  const techStack = techStackByLang[lang];
+
   return (
     <section id="skills" className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
@@ -40,7 +84,7 @@ const Skills = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2">
             <span className="text-primary font-mono text-lg block mb-2">02.</span>
-            tech_stack
+            {heading[lang]}
           </h2>
           <div className="section-line" />
         </motion.div>

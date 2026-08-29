@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, ArrowRight } from "lucide-react";
+import { useLanguage, Lang } from "@/hooks/use-language";
 
 const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -7,7 +8,30 @@ const WhatsAppIcon = ({ size = 20 }: { size?: number }) => (
   </svg>
 );
 
+const content: Record<
+  Lang,
+  { kicker: string; title: string; description: string; cta: string }
+> = {
+  pt: {
+    kicker: "06. o que vem por aí?",
+    title: "Vamos conversar",
+    description:
+      "Estou sempre aberto a novas oportunidades e projetos interessantes. Se você tem uma ideia, uma vaga ou só quer trocar uma ideia — minha caixa de entrada está aberta.",
+    cta: "diga_olá()",
+  },
+  en: {
+    kicker: "06. what's next?",
+    title: "Let's talk",
+    description:
+      "I'm always open to new opportunities and interesting projects. If you have an idea, a role, or just want to chat — my inbox is open.",
+    cta: "say_hello()",
+  },
+};
+
 const Contact = () => {
+  const { lang } = useLanguage();
+  const t = content[lang];
+
   return (
     <section id="contato" className="py-32 px-6 relative overflow-hidden">
       {/* Background glow */}
@@ -21,7 +45,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          06. o que vem por aí?
+          {t.kicker}
         </motion.span>
 
         <motion.h2
@@ -31,7 +55,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Vamos conversar
+          {t.title}
         </motion.h2>
 
         <motion.p
@@ -41,9 +65,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Estou sempre aberto a novas oportunidades e projetos interessantes.
-          Se você tem uma ideia, uma vaga ou só quer trocar uma ideia — minha
-          caixa de entrada está aberta.
+          {t.description}
         </motion.p>
 
         <motion.a
@@ -57,7 +79,7 @@ const Contact = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <WhatsAppIcon size={18} />
-          diga_olá()
+          {t.cta}
           <ArrowRight size={16} className="ml-1" />
         </motion.a>
 

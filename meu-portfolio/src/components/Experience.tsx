@@ -1,45 +1,103 @@
 import { motion } from "framer-motion";
+import { useLanguage, Lang } from "@/hooks/use-language";
 
-const experiences = [
-  {
-    company: "Accion Sistemas",
-    role: "Desenvolvedor Fullstack Pleno N2",
-    period: "Mar 2026 → Atualmente",
-    duration: "atual",
-    techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
-    description:
-      "Continuo como líder do projeto do Seven+ que está ganhando cada vez mais volume, sendo utilizado por clientes e recebendo muitos feedbacks ótimos de usabilidade, escalabilidade e de fácil acesso para os mesmos. Obtendo um desenvolvimento completo e correto durante todo o ciclo Scrum.",
-  },
-  {
-    company: "Accion Sistemas",
-    role: "Desenvolvedor Fullstack Pleno N1",
-    period: "Jun 2025 → Fev 2026",
-    duration: "8 meses",
-    techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
-    description:
-      "Liderei o desenvolvimento técnico do Seven+, uma plataforma estratégica de gestão de vendas B2B na Accion Sistemas. Fui o responsável por todo o ciclo de vida do produto — desde a arquitetura do sistema e otimização do backend até a implementação do front-end e a implantação em nuvem.",
-  },
-  {
-    company: "Accion Sistemas",
-    role: "Desenvolvedor Fullstack Trainee",
-    period: "Mar 2025 → Jun 2025",
-    duration: "4 meses",
-    techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker", "Android Studio"],
-    description:
-      "Comecei como desenvolvedor trainee lidando com pequenos problemas desenvolvidos em Android Studio e outros projetos legados para iniciar o entendimento das regras de negócio.",
-  },
-  {
-    company: "Universidade Estadual de Maringá",
-    role: "Desenvolvedor Fullstack Estagiário",
-    period: "Ago 2023 → Ago 2024",
-    duration: "~1 ano",
-    techs: ["React", "Spring Boot", "PostgreSQL", "Docker"],
-    description:
-      "Estagiário em desenvolvimento web full-stack no projeto 'Uma Solução Tecnológica para a Vigilância Entomológica e Controle de Vetores das Arboviroses no Paraná', desenvolvendo aplicações web e mobile para auxiliar na detecção e controle de surtos de dengue em parceria com SESA/PR e Ministério Público do Estado.",
-  },
-];
+interface ExperienceEntry {
+  company: string;
+  role: string;
+  period: string;
+  duration: string;
+  techs: string[];
+  description: string;
+}
+
+const experiencesByLang: Record<Lang, ExperienceEntry[]> = {
+  pt: [
+    {
+      company: "Accion Sistemas",
+      role: "Desenvolvedor Fullstack Pleno N2",
+      period: "Mar 2026 → Atualmente",
+      duration: "atual",
+      techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
+      description:
+        "Continuo como líder técnico do Seven+, que está ganhando cada vez mais volume de uso e recebendo bons feedbacks de usabilidade e escalabilidade dos clientes. Mantenho um ciclo Scrum completo, da definição técnica da feature ao deploy em produção.",
+    },
+    {
+      company: "Accion Sistemas",
+      role: "Desenvolvedor Fullstack Pleno N1",
+      period: "Jun 2025 → Fev 2026",
+      duration: "8 meses",
+      techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
+      description:
+        "Liderei o desenvolvimento técnico do Seven+, plataforma estratégica de gestão de vendas B2B na Accion Sistemas. Responsável por todo o ciclo de vida do produto — da arquitetura do sistema e otimização do backend à implementação do frontend e implantação em nuvem.",
+    },
+    {
+      company: "Accion Sistemas",
+      role: "Desenvolvedor Fullstack Trainee",
+      period: "Mar 2025 → Jun 2025",
+      duration: "4 meses",
+      techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker", "Android Studio"],
+      description:
+        "Comecei como trainee resolvendo demandas em projetos legados e em Android Studio, construindo entendimento das regras de negócio antes de assumir o Seven+.",
+    },
+    {
+      company: "Universidade Estadual de Maringá",
+      role: "Desenvolvedor Fullstack Estagiário",
+      period: "Ago 2023 → Ago 2024",
+      duration: "~1 ano",
+      techs: ["React", "Spring Boot", "PostgreSQL", "Docker"],
+      description:
+        "Estagiário em desenvolvimento web fullstack no projeto 'Uma Solução Tecnológica para a Vigilância Entomológica e Controle de Vetores das Arboviroses no Paraná', desenvolvendo aplicações web e mobile usadas por agentes de campo da SESA/PR para apoiar a detecção e o controle de surtos de dengue.",
+    },
+  ],
+  en: [
+    {
+      company: "Accion Sistemas",
+      role: "Fullstack Developer, Pleno N2",
+      period: "Mar 2026 → Present",
+      duration: "current",
+      techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
+      description:
+        "Continuing as technical lead of Seven+, which keeps gaining usage volume and positive feedback on usability and scalability from clients. I run a full Scrum cycle, from technical scoping to production deploy.",
+    },
+    {
+      company: "Accion Sistemas",
+      role: "Fullstack Developer, Pleno N1",
+      period: "Jun 2025 → Feb 2026",
+      duration: "8 months",
+      techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
+      description:
+        "Led technical development of Seven+, a strategic B2B sales management platform at Accion Sistemas. Owned the full product lifecycle — from system architecture and backend optimization to frontend implementation and cloud deployment.",
+    },
+    {
+      company: "Accion Sistemas",
+      role: "Fullstack Developer Trainee",
+      period: "Mar 2025 → Jun 2025",
+      duration: "4 months",
+      techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker", "Android Studio"],
+      description:
+        "Started as a trainee handling issues in legacy projects and Android Studio applications, building an understanding of the business rules before taking over Seven+.",
+    },
+    {
+      company: "Universidade Estadual de Maringá",
+      role: "Fullstack Developer Intern",
+      period: "Aug 2023 → Aug 2024",
+      duration: "~1 year",
+      techs: ["React", "Spring Boot", "PostgreSQL", "Docker"],
+      description:
+        "Fullstack development intern on the project 'A Technological Solution for Entomological Surveillance and Vector Control of Arboviruses in Paraná', building web and mobile applications used by SESA/PR field agents to support dengue outbreak detection and control.",
+    },
+  ],
+};
+
+const heading: Record<Lang, string> = {
+  pt: "experiência",
+  en: "experience",
+};
 
 const Experience = () => {
+  const { lang } = useLanguage();
+  const experiences = experiencesByLang[lang];
+
   return (
     <section id="experience" className="py-24 px-6">
       <div className="max-w-5xl mx-auto">
@@ -51,7 +109,7 @@ const Experience = () => {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-2">
             <span className="text-primary font-mono text-lg block mb-2">04.</span>
-            experiência
+            {heading[lang]}
           </h2>
           <div className="section-line" />
         </motion.div>

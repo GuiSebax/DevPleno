@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Download } from "lucide-react";
+import { useLanguage, Lang } from "@/hooks/use-language";
 
 const WhatsAppIcon = ({ size = 22 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -7,7 +8,69 @@ const WhatsAppIcon = ({ size = 22 }: { size?: number }) => (
   </svg>
 );
 
+const content: Record<
+  Lang,
+  {
+    badge: string;
+    kicker: string;
+    role: string;
+    description: React.ReactNode;
+    ctaProjects: string;
+    ctaContact: string;
+    cv: string;
+  }
+> = {
+  pt: {
+    badge: "disponível para novos projetos",
+    kicker: "hello_world",
+    role: "Desenvolvedor Fullstack Pleno",
+    description: (
+      <>
+        Construo aplicações fullstack em produção — do design de API REST e
+        modelagem de dados no PostgreSQL ao deploy em containers na AWS.
+        Atualmente lidero o desenvolvimento do Seven+ na{" "}
+        <span className="text-primary">Accion Sistemas</span>, com{" "}
+        <span className="text-primary">React</span>,{" "}
+        <span className="text-primary">Next.js</span>,{" "}
+        <span className="text-primary">NestJS</span> e{" "}
+        <span className="text-primary">Spring Boot</span>.
+      </>
+    ),
+    ctaProjects: "ver_projetos()",
+    ctaContact: "contato()",
+    cv: "curriculo.pdf",
+  },
+  en: {
+    badge: "available for new projects",
+    kicker: "hello_world",
+    role: "Fullstack Developer",
+    description: (
+      <>
+        I build production fullstack applications — from REST API design and
+        data modeling in PostgreSQL to containerized deploys on AWS.
+        Currently leading development of Seven+ at{" "}
+        <span className="text-primary">Accion Sistemas</span>, with{" "}
+        <span className="text-primary">React</span>,{" "}
+        <span className="text-primary">Next.js</span>,{" "}
+        <span className="text-primary">NestJS</span> and{" "}
+        <span className="text-primary">Spring Boot</span>.
+      </>
+    ),
+    ctaProjects: "view_projects()",
+    ctaContact: "contact()",
+    cv: "resume.pdf",
+  },
+};
+
+const cvHref: Record<Lang, string> = {
+  pt: "/curriculo.pdf",
+  en: "/CurriculoEN.pdf",
+};
+
 const Hero = () => {
+  const { lang } = useLanguage();
+  const t = content[lang];
+
   return (
     <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
       {/* Grid background */}
@@ -34,7 +97,7 @@ const Hero = () => {
             style={{ animation: "pulse-glow 2s ease-in-out infinite" }}
           />
           <span className="font-mono text-xs text-primary tracking-wide">
-            disponível para novos projetos
+            {t.badge}
           </span>
         </motion.div>
 
@@ -44,7 +107,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          {">"} hello_world
+          {">"} {t.kicker}
         </motion.p>
 
         <motion.h1
@@ -55,7 +118,7 @@ const Hero = () => {
         >
           <span className="text-foreground">Guilherme Clemente</span>
           <br />
-          <span className="gradient-text">Fullstack Developer</span>
+          <span className="gradient-text">{t.role}</span>
         </motion.h1>
 
         <motion.p
@@ -64,11 +127,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
         >
-          Desenvolvedor Fullstack apaixonado por criar soluções robustas e
-          escaláveis. Experiência com{" "}
-          <span className="text-primary">React</span>,{" "}
-          <span className="text-primary">Next.js</span>,{" "}
-          <span className="text-primary">Spring Boot</span> e mais.
+          {t.description}
         </motion.p>
 
         <motion.div
@@ -81,21 +140,21 @@ const Hero = () => {
             href="#projetos"
             className="px-6 py-3 bg-primary text-primary-foreground font-mono text-sm rounded-md hover:opacity-90 hover:shadow-lg hover:shadow-primary/20 transition-all"
           >
-            ver_projetos()
+            {t.ctaProjects}
           </a>
           <a
             href="#contato"
             className="px-6 py-3 border border-primary/60 text-primary font-mono text-sm rounded-md hover:bg-primary/10 hover:border-primary transition-all"
           >
-            contato()
+            {t.ctaContact}
           </a>
           <a
-            href="/curriculo.pdf"
+            href={cvHref[lang]}
             download
             className="inline-flex items-center gap-2 px-6 py-3 border border-border text-muted-foreground font-mono text-sm rounded-md hover:text-primary hover:border-primary/60 transition-all"
           >
             <Download size={15} />
-            curriculo.pdf
+            {t.cv}
           </a>
         </motion.div>
 
