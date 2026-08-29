@@ -38,7 +38,7 @@ const content: Record<
     ),
     ctaProjects: "ver_projetos()",
     ctaContact: "contato()",
-    cv: "curriculo.pdf",
+    cv: "Curriculo.pdf",
   },
   en: {
     badge: "available for new projects",
@@ -47,8 +47,8 @@ const content: Record<
     description: (
       <>
         I build production fullstack applications — from REST API design and
-        data modeling in PostgreSQL to containerized deploys on AWS.
-        Currently leading development of Seven+ at{" "}
+        data modeling in PostgreSQL to containerized deploys on AWS. Currently
+        leading development of Seven+ at{" "}
         <span className="text-primary">Accion Sistemas</span>, with{" "}
         <span className="text-primary">React</span>,{" "}
         <span className="text-primary">Next.js</span>,{" "}
@@ -63,7 +63,7 @@ const content: Record<
 };
 
 const cvHref: Record<Lang, string> = {
-  pt: "/curriculo.pdf",
+  pt: "/Curriculo.pdf",
   en: "/CurriculoEN.pdf",
 };
 
