@@ -38,12 +38,12 @@ const content: Record<
     ),
     ctaProjects: "ver_projetos()",
     ctaContact: "contato()",
-    cv: "Curriculo.pdf",
+    cv: "curriculo.pdf",
   },
   en: {
     badge: "available for new projects",
     kicker: "hello_world",
-    role: "Fullstack Developer",
+    role: "Mid-level Fullstack Developer",
     description: (
       <>
         I build production fullstack applications — from REST API design and
@@ -63,7 +63,7 @@ const content: Record<
 };
 
 const cvHref: Record<Lang, string> = {
-  pt: "/Curriculo.pdf",
+  pt: "/curriculo.pdf",
   en: "/CurriculoEN.pdf",
 };
 

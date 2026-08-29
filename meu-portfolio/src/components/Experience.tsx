@@ -52,7 +52,7 @@ const experiencesByLang: Record<Lang, ExperienceEntry[]> = {
   en: [
     {
       company: "Accion Sistemas",
-      role: "Fullstack Developer, Pleno N2",
+      role: "Mid-level Fullstack Developer (N2)",
       period: "Mar 2026 → Present",
       duration: "current",
       techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],
@@ -61,7 +61,7 @@ const experiencesByLang: Record<Lang, ExperienceEntry[]> = {
     },
     {
       company: "Accion Sistemas",
-      role: "Fullstack Developer, Pleno N1",
+      role: "Mid-level Fullstack Developer (N1)",
       period: "Jun 2025 → Feb 2026",
       duration: "8 months",
       techs: ["React", "Spring Boot", "TypeScript", "Tailwind", "PostgreSQL", "Docker"],

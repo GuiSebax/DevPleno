@@ -23,12 +23,12 @@ const navItems: Record<Lang, { label: string; href: string }[]> = {
 };
 
 const cvLabel: Record<Lang, string> = {
-  pt: "Curriculo.pdf",
+  pt: "curriculo.pdf",
   en: "resume.pdf",
 };
 
 const cvHref: Record<Lang, string> = {
-  pt: "/Curriculo.pdf",
+  pt: "/curriculo.pdf",
   en: "/CurriculoEN.pdf",
 };
 

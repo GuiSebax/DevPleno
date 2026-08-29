@@ -14,6 +14,10 @@ interface AboutContent {
     focus: string;
     available: string;
   };
+  codeValues: {
+    role: string;
+    education: string;
+  };
 }
 
 const content: Record<Lang, AboutContent> = {
@@ -59,6 +63,10 @@ const content: Record<Lang, AboutContent> = {
       focus: "foco",
       available: "disponível",
     },
+    codeValues: {
+      role: "Fullstack Pleno",
+      education: "Ciência da Computação — UEM (2021–2025)",
+    },
   },
   en: {
     heading: "about_me",
@@ -101,6 +109,10 @@ const content: Record<Lang, AboutContent> = {
       education: "education",
       focus: "focus",
       available: "available",
+    },
+    codeValues: {
+      role: "Mid-level Fullstack Developer",
+      education: "Computer Science — UEM (2021–2025)",
     },
   },
 };
@@ -174,7 +186,7 @@ const About = () => {
               </p>
               <p className="pl-5">
                 <span className="text-primary">{t.codeLabels.role}</span>:{" "}
-                <span className="text-code-string">"Fullstack Pleno"</span>,
+                <span className="text-code-string">"{t.codeValues.role}"</span>,
               </p>
               <p className="pl-5">
                 <span className="text-primary">{t.codeLabels.experience}</span>:{" "}
@@ -186,7 +198,7 @@ const About = () => {
               </p>
               <p className="pl-5">
                 <span className="text-primary">{t.codeLabels.education}</span>:{" "}
-                <span className="text-code-string">"Ciência da Computação — UEM (2021–2025)"</span>,
+                <span className="text-code-string">"{t.codeValues.education}"</span>,
               </p>
               <p className="pl-5">
                 <span className="text-primary">{t.codeLabels.focus}</span>: [
